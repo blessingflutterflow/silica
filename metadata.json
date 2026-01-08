@@ -1,0 +1,8 @@
+{
+  "name": "Slica Health",
+  "description": "A modern, monochromatic, and glassmorphic Clinic EHR system designed for clinical clarity and provider well-being.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
