@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { UserRole, Patient, Appointment } from '../types';
-import { NAV_ITEMS, MOCK_PATIENTS, MOCK_APPOINTMENTS } from '../constants';
+import { UserRole, Patient, Appointment } from '../types.ts';
+import { NAV_ITEMS, MOCK_PATIENTS, MOCK_APPOINTMENTS } from '../constants.tsx';
 import { 
   Bell, Search, LogOut, MoreVertical, Plus, UserCircle, 
   Clock, Video as VideoIcon, Activity, Calendar, 
@@ -108,7 +108,6 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
 
   return (
     <div className="flex h-screen overflow-hidden bg-slate-50 relative">
-      {/* Mobile Sidebar Overlay */}
       {isMobileMenuOpen && (
         <div 
           className="fixed inset-0 bg-slate-900/40 backdrop-blur-[2px] z-40 lg:hidden transition-all duration-300"
@@ -116,12 +115,10 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
         />
       )}
 
-      {/* Sidebar - Desktop */}
       <aside className="hidden lg:flex w-64 bg-silica-deep flex-col p-4 shrink-0 shadow-2xl z-30">
         <SidebarContent />
       </aside>
 
-      {/* Sidebar - Mobile Slide-in */}
       <aside className={`fixed inset-y-0 left-0 w-[280px] bg-silica-deep flex flex-col p-6 z-50 transform transition-transform duration-500 ease-out lg:hidden shadow-[20px_0_60px_rgba(0,0,0,0.5)] ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <button 
           onClick={() => setIsMobileMenuOpen(false)}
@@ -132,9 +129,7 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
         <SidebarContent />
       </aside>
 
-      {/* Main Canvas */}
       <main className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Bar */}
         <header className="h-16 md:h-20 lg:h-24 bg-white/90 backdrop-blur-xl border-b border-silica-border px-4 md:px-10 flex items-center justify-between sticky top-0 z-20 shrink-0 shadow-sm gap-3">
           <div className="flex items-center gap-3 md:gap-4 flex-1">
             <button 
@@ -144,7 +139,7 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
               <Menu size={20} />
             </button>
             <div className="relative max-w-xl w-full group">
-              <Search className="absolute left-4 md:left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-silica transition-colors" size={16} md:size={18} />
+              <Search className="absolute left-4 md:left-5 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-silica transition-colors" size={16} />
               <input 
                 type="text" 
                 placeholder="Search..."
@@ -163,17 +158,16 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
             </div>
             <div className="hidden md:block h-8 lg:h-10 w-px bg-slate-100 rounded-full"></div>
             <button className="relative p-2 md:p-3 text-slate-400 hover:text-silica-gold hover:bg-silica-goldSubtle rounded-xl lg:rounded-2xl transition-all shrink-0">
-              <Bell size={18} className="lg:w-6 lg:h-6" />
+              <Bell size={18} />
               <span className="absolute top-2 right-2 lg:top-3 lg:right-3 w-2 h-2 bg-silica-gold rounded-full border-2 border-white"></span>
             </button>
             <button className="flex items-center gap-2 bg-slate-900 text-white p-2.5 md:px-6 lg:px-8 lg:py-4 rounded-xl lg:rounded-[24px] text-[10px] lg:text-xs font-black uppercase tracking-widest hover:bg-silica-deep transition-all shadow-lg active:scale-95 group shrink-0">
-              <Plus size={16} className="group-hover:rotate-90 transition-transform duration-500 text-silica-gold" />
+              <Plus size={16} />
               <span className="hidden sm:inline">New Entry</span>
             </button>
           </div>
         </header>
 
-        {/* Content Area */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10 space-y-6 md:space-y-10 scroll-smooth bg-gradient-soft custom-scrollbar">
           {renderContent()}
         </div>
@@ -182,21 +176,19 @@ const Dashboard: React.FC<DashboardProps> = ({ role, onLogout }) => {
   );
 };
 
-/* --- Role Views --- */
-
 const DoctorView = () => (
   <div className="space-y-6 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div className="space-y-1">
         <h1 className="text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 tracking-tight lg:tracking-tighter leading-none">Doctor's Lounge</h1>
         <p className="text-slate-400 font-bold uppercase tracking-[0.15em] text-[9px] md:text-xs flex items-center gap-2">
-          <Activity size={12} md:size={14} className="text-silica" /> Clinical Stream Active
+          <Activity size={14} className="text-silica" /> Clinical Stream Active
         </p>
       </div>
       <div className="flex gap-2">
         <button className="flex-1 sm:flex-none px-4 md:px-6 py-3 bg-white border-2 border-slate-100 rounded-xl md:rounded-2xl text-[9px] font-black uppercase tracking-widest text-slate-500 hover:border-silica transition-all">Archive</button>
         <button className="flex-1 sm:flex-none px-4 md:px-6 py-3 bg-silica-gold text-white rounded-xl md:rounded-2xl text-[9px] font-black uppercase tracking-widest hover:shadow-xl transition-all flex items-center justify-center gap-2">
-          <CheckCircle2 size={14} md:size={16} /> Sign-Off
+          <CheckCircle2 size={16} /> Sign-Off
         </button>
       </div>
     </div>
@@ -240,7 +232,7 @@ const NurseView = () => (
       <div className="bg-silica-subtle/30 rounded-2xl md:rounded-[40px] p-4 md:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-3">
           <h3 className="text-lg md:text-2xl font-black text-slate-900 flex items-center gap-3">
-            <ClipboardCheck className="text-silica-gold" size={24} md:size={28} />
+            <ClipboardCheck className="text-silica-gold" size={28} />
             Intake Priority
           </h3>
           <span className="self-start sm:self-center text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-silica-gold bg-silica-goldSubtle px-3 py-1 rounded-full border border-silica-gold/20">LIVE DATA</span>
@@ -302,7 +294,7 @@ const ReceptionistView = () => (
                   <span className="text-[8px] text-slate-400 font-black uppercase tracking-widest">Std.</span>
                 </div>
                 <div className="overflow-hidden">
-                  <p className="font-black text-sm md:text-xl text-slate-900 tracking-tight truncate">{app.patientName}</p>
+                  <p className="font-black text-sm md:text-xl text-slate-900 tracking-tight truncate leading-tight">{app.patientName}</p>
                   <p className="text-[8px] md:text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5 md:mt-1 truncate">
                     {app.doctor} • <span className="sm:hidden">{app.time}</span>
                   </p>
@@ -310,8 +302,8 @@ const ReceptionistView = () => (
               </div>
               <div className="flex items-center gap-3 md:gap-6 shrink-0 ml-2">
                 <div className="hidden md:block"><StatusBadge status={app.status} /></div>
-                <div className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-white border border-slate-100 rounded-lg md:rounded-2xl hover:bg-slate-50 shadow-sm">
-                  <MoreVertical size={16} md:size={20} className="text-slate-400" />
+                <div className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-white border border-slate-100 rounded-lg md:rounded-2xl hover:bg-slate-50 shadow-md">
+                  <MoreVertical size={20} className="text-slate-400" />
                 </div>
               </div>
             </div>
@@ -333,7 +325,7 @@ const ReceptionistView = () => (
                <p className="text-2xl md:text-5xl font-black tracking-tighter leading-none">$2,480</p>
              </div>
              <div className="text-right">
-               <span className="text-[7px] md:text-[9px] font-black bg-silica-gold/20 text-silica-gold px-2 py-1 rounded-md border border-silica-gold/30 uppercase tracking-widest">+22%</span>
+               <span className="text-[9px] font-black bg-silica-gold/20 text-silica-gold px-2 py-1 rounded-md border border-silica-gold/30 uppercase tracking-widest">+22%</span>
              </div>
           </div>
           <div className="h-px bg-white/5 rounded-full"></div>
@@ -345,7 +337,7 @@ const ReceptionistView = () => (
         
         <button className="w-full py-3.5 md:py-5 bg-white text-silica-deep rounded-xl md:rounded-[24px] font-black uppercase tracking-[0.2em] text-[9px] md:text-xs hover:bg-silica-gold hover:text-white transition-all shadow-xl group/btn flex items-center justify-center gap-2">
           Concierge Portal
-          <ArrowUpRight size={16} md:size={20} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+          <ArrowUpRight size={20} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
         </button>
       </div>
     </div>
@@ -401,8 +393,6 @@ const AdminView = () => (
     </div>
   </div>
 );
-
-/* --- Shared Components --- */
 
 const StatCard = ({ label, value, subtext, color, icon }: any) => {
   const colorMap: Record<string, string> = {
@@ -481,7 +471,7 @@ const TrafficChart = () => (
            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fontSize: 8, fill: '#94a3b8', fontWeight: 900}} dy={10} />
            <YAxis axisLine={false} tickLine={false} tick={{fontSize: 8, fill: '#94a3b8', fontWeight: 900}} />
            <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 40px -10px rgb(0 0 0 / 0.15)', fontWeight: 900, fontSize: '9px' }} />
-           <Area type="monotone" dataKey="count" stroke="#c9a537" strokeWidth={3} md:strokeWidth={4} fillOpacity={1} fill="url(#colorTraffic)" />
+           <Area type="monotone" dataKey="count" stroke="#c9a537" strokeWidth={3} fillOpacity={1} fill="url(#colorTraffic)" />
          </AreaChart>
        </ResponsiveContainer>
     </div>
@@ -490,10 +480,10 @@ const TrafficChart = () => (
 
 const TelehealthCard = () => (
   <div className="bg-silica-deep rounded-2xl md:rounded-[48px] p-6 md:p-10 text-white relative overflow-hidden group shadow-xl border-2 md:border-4 border-white/5">
-    <div className="absolute top-0 right-0 w-32 h-32 md:w-56 md:h-56 bg-silica-gold rounded-full blur-[60px] md:blur-[100px] opacity-20"></div>
+    <div className="absolute top-0 right-0 w-32 h-32 md:w-56 md:h-56 bg-silica-gold rounded-full blur-[60px] md:blur-[120px] opacity-20"></div>
     <div className="relative z-10 space-y-5 md:space-y-8">
        <div className="w-10 h-10 md:w-16 md:h-16 bg-white/10 backdrop-blur-2xl rounded-xl md:rounded-[24px] flex items-center justify-center border border-white/20 shadow-inner">
-         <VideoIcon size={20} className="text-silica-gold md:w-8 md:h-8" />
+         <VideoIcon size={24} className="text-silica-gold" />
        </div>
        <div>
          <h4 className="text-xl md:text-3xl font-black leading-tight mb-2 md:mb-3 tracking-tighter">Silica Connect</h4>
@@ -501,7 +491,7 @@ const TelehealthCard = () => (
        </div>
        <button className="w-full py-3.5 md:py-5 bg-white text-silica-deep rounded-xl md:rounded-[24px] font-black uppercase tracking-[0.2em] text-[9px] md:text-xs hover:bg-silica-gold hover:text-white transition-all shadow-xl group/btn flex items-center justify-center gap-2">
          Open Lounge
-         <ArrowUpRight size={16} md:size={20} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+         <ArrowUpRight size={20} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
        </button>
     </div>
   </div>

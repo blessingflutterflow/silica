@@ -1,17 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
-import { AppStatus, UserRole } from './types';
-import Splash from './views/Splash';
-import Onboarding from './views/Onboarding';
-import Login from './views/Login';
-import Dashboard from './views/Dashboard';
+import { AppStatus, UserRole } from './types.ts';
+import Splash from './views/Splash.tsx';
+import Onboarding from './views/Onboarding.tsx';
+import Login from './views/Login.tsx';
+import Dashboard from './views/Dashboard.tsx';
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<AppStatus>(AppStatus.SPLASH);
   const [userRole, setUserRole] = useState<UserRole>(UserRole.DOCTOR);
 
   useEffect(() => {
-    // Basic progression for demo purposes
     if (status === AppStatus.SPLASH) {
       const timer = setTimeout(() => setStatus(AppStatus.ONBOARDING), 2000);
       return () => clearTimeout(timer);
